@@ -39,29 +39,29 @@ const StudentTableRow = props => {
       <Table className="table table-dark table-striped table-hover border table-bordered col-12 col-sm-12 col-lg-12 table-responsive">
         <thead>
           <tr>
+            <th>Roll No</th>
             <th>Name</th>
             <th>Email</th>
-            <th>Roll No</th>
-            <th>Action</th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>{students.map((list, i) => {
           return (
             <tr key={i}>
+              <td>{list.rollno}</td>
               <td>{list.name}</td>
               <td>{list.email}</td>
-              <td>{list.rollno}</td>
 
               <td>
                 <Link to={"/edit-student/" + list._id}>
-                  <Button className="edit-link">Edit</Button>
+                  <Button className="edit-link" size="sm">
+                    Edit</Button>
                 </Link>
                 <Button
                   size="sm"
                   variant="danger"
-                  onClick={() => handleDelete(list._id)}
-                >
+                  onClick={() => handleDelete(list._id)}>
                   Delete
         </Button>
               </td>

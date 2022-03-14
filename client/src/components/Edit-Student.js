@@ -111,6 +111,7 @@ const EditStudent = (props) => {
           <Form.Control
             type="number"
             name="rollno"
+            min="1"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             value={formik.values.rollno}

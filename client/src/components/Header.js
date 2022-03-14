@@ -6,7 +6,7 @@ const Header = () => {
     return (
         <Navbar bg="dark" variant="dark" expand="sm">
             <Navbar.Brand>
-                <Link to={"/create-student"} className="nav-link navbar-brand">
+                <Link to={"/student-list"} className="nav-link navbar-brand">
                     Student App
                 </Link>
             </Navbar.Brand>
@@ -16,12 +16,6 @@ const Header = () => {
                     <Nav>
                         <Link to={"/create-student"} className="nav-link" >
                             Create Student
-                    </Link>
-                    </Nav>
-
-                    <Nav>
-                        <Link to={"/student-list"} className="nav-link">
-                            Student List
                     </Link>
                     </Nav>
                 </Nav>
