@@ -25,27 +25,35 @@ router.post("/create-student", (req, res) => {
   });
 });
 
-// Update Student
-router.put("/update-student/:id", async (req, res) => {
-  try {
-    const _id = req.params.id;
-    const findStudent = await studentSchema.findOne({ email: req.body.email })
-    if (findStudent) {
-      return res.json({
-        message: `Email Address ${req.body.email} is already taken.
-        Use Another Email Address !` })
-    }
-    else {
-      const updateStudent = await studentSchema.findByIdAndUpdate(_id, req.body, {
-        new: true
-      });
+router
+  .route("/update-student/:id")
+  // Get Single Student
+  .get((req, res) => {
+    studentSchema.findById(req.params.id, (error, data) => {
+      if (error) {
+        return next(error);
+      } else {
+        res.json(data);
+      }
+    });
+  })
 
-      res.status(200).send(updateStudent);
-    }
-  } catch (e) {
-    res.status(400).send(e);
-  }
-});
+  // Update Student Data
+  .put((req, res, next) => {
+    studentSchema.findByIdAndUpdate(
+      req.params.id,
+      {
+        $set: req.body,
+      },
+      (error, data) => {
+        if (error) {
+          return next(error);
+        } else {
+          res.json(data);
+        }
+      }
+    );
+  });
 
 
 // READ Students
@@ -59,7 +67,7 @@ router.route("/get-students").get((req, res) => {
   });
 });
 
-// Get Single Student
+// Get Student Data To Edit
 router.route("/edit-student/:id").get((req, res) => {
   studentSchema.findById(req.params.id, (error, data) => {
     if (error) {
